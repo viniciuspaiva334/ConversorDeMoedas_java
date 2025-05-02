@@ -9,7 +9,7 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
-public class ApiRequisition {
+public class ApiRequisition extends GsonDados{
     //public String moedaNome ;
     private GsonDados gson = new GsonDados( );
 
@@ -20,11 +20,13 @@ public class ApiRequisition {
          HttpRequest request = HttpRequest.newBuilder().uri(URI.create("https://v6.exchangerate-api.com/v6/cdfc494a2c30da38aef48191/pair/"+moedaNome1+"/"+moedaNome2)).build();
          HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
          gson.setDeserializationGson(response);
-
-     }
-     public String retornaJSON (){
-        return  gson.getJson();
+         gson.convertFormat();
      }
 
- 
+
+    public static void main(String[] args) throws IOException, InterruptedException {
+        ApiRequisition teste01 = new ApiRequisition("USD", "BRL");
+
+        System.out.println();
+    }
 }

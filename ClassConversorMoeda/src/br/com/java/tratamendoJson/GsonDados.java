@@ -7,17 +7,21 @@ import java.net.http.HttpResponse;
 
 public class GsonDados {
     private String Json;
-    private dadosMoeda dados;
+   public dadosMoeda dados;
     Gson gson  = new Gson ();
 
 
     public void setDeserializationGson(HttpResponse<String> response){
-      dados = gson.fromJson(response.body() , dadosMoeda.class);
+      this.dados = gson.fromJson(response.body() , dadosMoeda.class);
 
     }
-    public String getJson(){
-        Json = gson.toJson(dados);
-        return Json;
+    public void convertFormat(){
+   // formato ja convertido
+     System.out.println(" conversao : ["+dados.getBaseCode()+"] -> [" + dados.getTargetCode() + "] = " + dados.conversion_rate() );
+
     }
+
+
 
 }
+
